@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise</title>
+</head>
+<body>
+  <h2 id="array-var"></h2>
+  <h3>
+  1. Search.<br/>
+  2. Sum.<br/>
+  3. Sort.<br/>
+  </h3>
+
+  Column
+  <input type="number" id="column">
+  Row
+  <input type="number" id="row">
+  <button type="button" onclick="Set()">Set</button><br/>
+
+  <div id="var" style="visibility: hidden;">
+  <p id="element"></p>
+  <input type="number" id="value">
+  <button type="button" onclick="Add()">Add</button>
+  </div>
+
+  <input type="number" id="mode">
+  <button type="button" onclick="Submit()">Submit</button><br/>
+  <div id="search" style="visibility: hidden;">
+  <input type="number" id="s_value">
+  <button type="button" onclick="Search()">Search</button>
+  </div>
+
+  <h2 id="result"></h2>
+  </form>
+
+  <script type="text/javascript">
+
+    var array = new Array();
+
+    var i = 0; //for column
+    var j = 0; //for row
+    var c = 0;
+    var r = 0;
+
+    document.getElementById("array-var").innerHTML = "Array is: ["+ Show(array) + "]";
+
+    //Set click event
+    function Set(){
+      c = parseInt(document.getElementById("column").value);
+      r = parseInt(document.getElementById("row").value);
+      document.getElementById("var").style.visibility = "visible";
+
+      document.getElementById("element").innerHTML = "Ar[0][0]";
+    }
+
+    function Add(){
+      var value = parseInt(document.getElementById("value").value);
+
+      if(j==0)
+        array[i] = new Array();
+
+      array[i].push(value);
+
+      if(j==r-1){
+        j = 0;
+        i ++;
+      }
+      else j++;
+      if(i==c)
+        document.getElementById("var").style.visibility = "hidden";
+      document.getElementById("element").innerHTML = "Ar[" + i + "][" + j +"]";
+
+      document.getElementById("array-var").innerHTML = "Array is: ["+ Show(array) + "]" ;
+    }
+
+    //Submit click event
+    function Submit(){
+      mode = parseInt(document.getElementById("mode").value);
+
+      switch(mode){
+        case 1: {
+          document.getElementById("search").style.visibility = "visible";
+          break;
+        }
+        case 2: {
+          document.getElementById("search").style.visibility = "hidden";
+          Sum();
+          break;
+        }
+        case 3: {
+          document.getElementById("search").style.visibility = "hidden";
+          Sort();
+          break;
+        }
+        default: {
+          alert("Wrong number!");
+        }
+      }
+  }
+
+    //Search function
+    function Search(){
+      var x = parseInt(document.getElementById("s_value").value);
+
+      for (var k = 0; k < c; k++) {
+        for (var l = 0; l < r; l++) {
+          if(x == array[k][l])
+            return document.getElementById("result").innerHTML = "Result: Exist"
+        }
+      }
+      return document.getElementById("result").innerHTML = "Result: Non-exist"
+    }
+
+    //Sum function
+    function Sum(){
+      var sum = 0;
+      for (var k = 0; k < c; k++) {
+        for (var l = 0; l < r; l++) {
+          sum += array[k][l];
+        }
+      }
+      document.getElementById("result").innerHTML = "Result: " + sum;
+    }
+
+    //Sort function
+    function Sort(){
+      var array2 = new Array();
+      for (var k = 0; k < c; k++) {
+        for (var l = 0; l < r; l++) {
+          array2.push(array[k][l]);
+        }
+      }
+
+      array2.sort(function(a, b){return a - b});
+      document.getElementById("result").innerHTML = "Result: [" + array2 +"]";
+    }
+
+    function Show(array){
+      var s = "";
+      for (var l = 0; l < i; l++) {
+        s = s + "[" + array[l] +"],"
+      }
+      return s;
+    }
+  </script>
+</body>
+</html>

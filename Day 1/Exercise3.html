@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise</title>
+</head>
+<body>
+  <h2 id="array-var"></h2>
+  <h3>
+  Enter the name
+  </h3>
+
+  <input type="text" id="name">
+  <button type="button" onclick="Submit()">Submit</button><br/>
+  <button type="button" onclick="Sort()">Sort</button>
+
+  <h2 id="result"></h2>
+  </form>
+
+  <script type="text/javascript">
+
+    var array = new Array();
+    document.getElementById("array-var").innerHTML = "Array is: [" + array +"]";
+
+    //Submit click event
+    function Submit(){
+      var c = document.getElementById("name").value;
+
+      array.push(c);
+
+      document.getElementById("array-var").innerHTML = "Array is: [" + array +"]";
+    }
+
+    //Sort function
+    function Sort(){
+      array.sort();
+      document.getElementById("result").innerHTML = "Result: [" + array +"]";
+    }
+  </script>
+</body>
+</html>
