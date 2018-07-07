@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SlideShow</title>
+    <style>
+    li {
+        display: inline;
+    }
+    div {
+        margin: auto;
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <div>
+    <ul id="img_list" type="none">
+        <li><a href="large_image/cat.jpeg" title="This is a cat!"><img src="small_image/cat.jpeg"></a></li>
+        <li><a href="large_image/dog.jpeg" title="This is a dog!"><img src="small_image/dog.jpeg"></a></li>
+        <li><a href="large_image/horse.jpeg" title="This is a horse!"><img src="small_image/horse.jpeg"></a></li>
+        <li><a href="large_image/tiger.jpeg" title="This is a tiger!"><img src="small_image/tiger.jpeg"></a></li>
+    </ul>
+    </div>
+    <div>
+        <h1 id="title"></h1>
+        <img id="picture" height="50%" width="50%">
+        <button onclick="stop_slide()">Stop Slide!</button>
+    </div>
+
+    <script>
+        var list = document.getElementById("img_list");
+        var a = list.getElementsByTagName("a");
+
+        for (let i = 0; i < a.length; i++) {
+            a[i].addEventListener("click", function(event){
+                event.preventDefault();
+                show(a[i]);
+            });  
+        }
+
+        var j = 0;
+        var interval = setInterval(function(){
+            if(j == 4) j -= 4;
+            show(a[j]);
+            j++;
+        } ,1000);
+
+        function show(a){
+            document.getElementById("title").innerHTML = a.getAttribute("title");
+            document.getElementById("picture").src = a.getAttribute("href");
+        }
+
+        function stop_slide(){
+            clearInterval(interval);
+        }
+
+    </script>
+</body>
+</html>
